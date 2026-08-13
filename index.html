@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pergunta</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: #75413f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .caixa {
+            width: 500px;
+            height: 300px;
+            background-color: #e4eaf9;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            color: #75413f;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            border: none;
+            padding: 14px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #sim {
+            background-color: #75413f;
+            color: white;
+        }
+
+        #sim:hover {
+            transform: scale(1.08);
+        }
+
+        #nao {
+            background-color: #999;
+            color: white;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="caixa" id="caixa">
+
+        <h1>Você gosta de mim? ❤️</h1>
+
+        <div class="botoes">
+            <button id="sim">Sim</button>
+            <button id="nao">Não</button>
+        </div>
+
+    </div>
+
+    <script>
+        const botaoNao = document.getElementById("nao");
+        const caixa = document.getElementById("caixa");
+
+        botaoNao.addEventListener("mouseenter", fugir);
+
+        function fugir() {
+
+            // Remove o botão do fluxo normal
+            botaoNao.style.position = "absolute";
+
+            // Tamanho da caixa
+            const larguraCaixa = caixa.clientWidth;
+            const alturaCaixa = caixa.clientHeight;
+
+            // Tamanho do botão
+            const larguraBotao = botaoNao.offsetWidth;
+            const alturaBotao = botaoNao.offsetHeight;
+
+            // Gera uma posição aleatória
+            const novaPosicaoX = Math.random() * (larguraCaixa - larguraBotao);
+            const novaPosicaoY = Math.random() * (alturaCaixa - alturaBotao);
+
+            // Move o botão
+            botaoNao.style.left = novaPosicaoX + "px";
+            botaoNao.style.top = novaPosicaoY + "px";
+        }
+
+        // Quando clicar em SIM
+        document.getElementById("sim").addEventListener("click", function() {
+            alert("Eu sabia! ❤️");
+        });
+    </script>
+
+</body>
+</html>

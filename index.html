@@ -15,17 +15,18 @@
             z-index: 2000;
             animation: falaSubir 1s ease-out forwards;
         }
+
         @keyframes falaSubir {
             0% {
-                transform: translateY(0) scale(0.8);
-                opacity: 1;
-            }
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+    }
 
             100% {
-                transform: translateY(-60px) scale(1.1);
-                opacity: 0;
-            }
-        }
+        transform: translateY(-60px) scale(1.1);
+        opacity: 0;
+    }
+}
         .coracao {
             position: fixed;
             bottom: -50px;
@@ -128,7 +129,23 @@
     </div>
 
     <script>
-        function fugir() {
+        const botaoNao = document.getElementById("nao");
+const caixa = document.getElementById("caixa");
+
+let mouseX = 0;
+let mouseY = 0;
+
+// Guarda a posição do mouse
+caixa.addEventListener("mousemove", function(event) {
+    const rect = caixa.getBoundingClientRect();
+
+    mouseX = event.clientX - rect.left;
+    mouseY = event.clientY - rect.top;
+});
+
+botaoNao.addEventListener("mouseenter", fugir);
+
+function fugir() {
 
     botaoNao.style.position = "absolute";
 
@@ -169,13 +186,13 @@
     const frases = [
         "Olé 😂",
         "Otária 🤣",
-        "Errouuu 😎",
-        "Uia quase 👀",
+        "Errouuuu 😎",
+        "Uia quase be 👀",
         "Nem tentou 😂",
-        "Ta lentinha bebe 🏃",
-        "KAKAKAKKAKAKA",
+        "Faltou querer 🏃",
+        "KAKAKAKAKKA!",
         "NT 😏",
-        "sobrou nada 😂"
+        "Sobrou nada 😂"
     ];
 
     const frase = document.createElement("div");
@@ -199,7 +216,7 @@
         // Quando clicar em SIM
         document.getElementById("sim").addEventListener("click", function() {
 
-    alert("Beijinhos "<br>"Eu sabia! ❤️"<br>"vou aproveitar bem");
+    alert("Eu sabia! ❤️");
 
     // Cria vários corações
     for (let i = 0; i < 30; i++) {

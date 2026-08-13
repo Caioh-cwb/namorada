@@ -87,34 +87,64 @@
     </div>
 
     <script>
-        const botaoNao = document.getElementById("nao");
-        const caixa = document.getElementById("caixa");
+       const botaoNao = document.getElementById("nao");
+const caixa = document.getElementById("caixa");
 
-        botaoNao.addEventListener("mouseenter", fugir);
+let mouseX = 0;
+let mouseY = 0;
 
-        function fugir() {
+// Guarda a posição do mouse
+caixa.addEventListener("mousemove", function(event) {
+    const rect = caixa.getBoundingClientRect();
 
-            // Remove o botão do fluxo normal
-            botaoNao.style.position = "absolute";
+    mouseX = event.clientX - rect.left;
+    mouseY = event.clientY - rect.top;
+});
 
-            // Tamanho da caixa
-            const larguraCaixa = caixa.clientWidth;
-            const alturaCaixa = caixa.clientHeight;
+botaoNao.addEventListener("mouseenter", fugir);
 
-            // Tamanho do botão
-            const larguraBotao = botaoNao.offsetWidth;
-            const alturaBotao = botaoNao.offsetHeight;
+function fugir() {
 
-            // Gera uma posição aleatória
-            const novaPosicaoX = Math.random() * (larguraCaixa - larguraBotao);
-            const novaPosicaoY = Math.random() * (alturaCaixa - alturaBotao);
+    botaoNao.style.position = "absolute";
 
-            // Move o botão
-            botaoNao.style.left = novaPosicaoX + "px";
-            botaoNao.style.top = novaPosicaoY + "px";
-        }
+    const larguraCaixa = caixa.clientWidth;
+    const alturaCaixa = caixa.clientHeight;
 
-        // Quando clicar em SIM
+    const larguraBotao = botaoNao.offsetWidth;
+    const alturaBotao = botaoNao.offsetHeight;
+
+    // Distância mínima que o botão precisa ficar do mouse
+    const distanciaMinima = 120;
+
+    let novaPosicaoX;
+    let novaPosicaoY;
+
+    let distancia;
+
+    // Tenta encontrar uma posição distante
+    do {
+
+        novaPosicaoX = Math.random() * (larguraCaixa - larguraBotao);
+        novaPosicaoY = Math.random() * (alturaCaixa - alturaBotao);
+
+        const centroBotaoX = novaPosicaoX + larguraBotao / 2;
+        const centroBotaoY = novaPosicaoY + alturaBotao / 2;
+
+        const diferencaX = centroBotaoX - mouseX;
+        const diferencaY = centroBotaoY - mouseY;
+
+        distancia = Math.sqrt(
+            diferencaX * diferencaX +
+            diferencaY * diferencaY
+        );
+
+    } while (distancia < distanciaMinima);
+
+    botaoNao.style.left = novaPosicaoX + "px";
+    botaoNao.style.top = novaPosicaoY + "px";
+}
+
+        // Quando clicar em sim
         document.getElementById("sim").addEventListener("click", function() {
             alert("Eu sabia! ❤️");
         });

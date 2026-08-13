@@ -128,23 +128,73 @@
     </div>
 
     <script>
-        const botaoNao = document.getElementById("nao");
-const caixa = document.getElementById("caixa");
+        function fugir() {
 
-let mouseX = 0;
-let mouseY = 0;
+    botaoNao.style.position = "absolute";
 
-// Guarda a posição do mouse
-caixa.addEventListener("mousemove", function(event) {
-    const rect = caixa.getBoundingClientRect();
+    const larguraCaixa = caixa.clientWidth;
+    const alturaCaixa = caixa.clientHeight;
 
-    mouseX = event.clientX - rect.left;
-    mouseY = event.clientY - rect.top;
-});
+    const larguraBotao = botaoNao.offsetWidth;
+    const alturaBotao = botaoNao.offsetHeight;
 
-botaoNao.addEventListener("mouseenter", fugir);
+    const distanciaMinima = 180;
 
-alert("Beijinhos "<br>"Eu sabia! ❤️"<br>"vou aproveitar bem");
+    let novaPosicaoX;
+    let novaPosicaoY;
+    let distancia;
+
+    do {
+        novaPosicaoX = Math.random() * (larguraCaixa - larguraBotao);
+        novaPosicaoY = Math.random() * (alturaCaixa - alturaBotao);
+
+        const centroBotaoX = novaPosicaoX + larguraBotao / 2;
+        const centroBotaoY = novaPosicaoY + alturaBotao / 2;
+
+        const diferencaX = centroBotaoX - mouseX;
+        const diferencaY = centroBotaoY - mouseY;
+
+        distancia = Math.sqrt(
+            diferencaX * diferencaX +
+            diferencaY * diferencaY
+        );
+
+    } while (distancia < distanciaMinima);
+
+    botaoNao.style.left = novaPosicaoX + "px";
+    botaoNao.style.top = novaPosicaoY + "px";
+
+
+    // 💬 FRASE DA FUGA
+    const frases = [
+        "Olé 😂",
+        "Otária 🤣",
+        "Errouuu 😎",
+        "Uia quase 👀",
+        "Nem tentou 😂",
+        "Ta lentinha bebe 🏃",
+        "KAKAKAKKAKAKA",
+        "NT 😏",
+        "sobrou nada 😂"
+    ];
+
+    const frase = document.createElement("div");
+
+    frase.classList.add("fala-fuga");
+    frase.innerText =
+        frases[Math.floor(Math.random() * frases.length)];
+
+    const rect = botaoNao.getBoundingClientRect();
+
+    frase.style.left = rect.left + "px";
+    frase.style.top = rect.top - 10 + "px";
+
+    document.body.appendChild(frase);
+
+    setTimeout(() => {
+        frase.remove();
+    }, 1000);
+}
 
         // Quando clicar em SIM
         document.getElementById("sim").addEventListener("click", function() {

@@ -6,6 +6,27 @@
     <title>Pergunta</title>
 
     <style>
+        .coracao {
+            position: fixed;
+            bottom: -50px;
+            font-size: 30px;
+            pointer-events: none;
+            animation: subir 3s linear forwards;
+            z-index: 1000;
+        }
+
+         @keyframes subir {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
         * {
             box-sizing: border-box;
         }
@@ -87,7 +108,7 @@
     </div>
 
     <script>
-       const botaoNao = document.getElementById("nao");
+        const botaoNao = document.getElementById("nao");
 const caixa = document.getElementById("caixa");
 
 let mouseX = 0;
@@ -142,11 +163,37 @@ function fugir() {
 
     botaoNao.style.left = novaPosicaoX + "px";
     botaoNao.style.top = novaPosicaoY + "px";
-}
+        }
 
-        // Quando clicar em sim
+        // Quando clicar em SIM
         document.getElementById("sim").addEventListener("click", function() {
-            alert("Eu sabia! ❤️");
+
+    alert("Eu sabia! ❤️");
+
+    // Cria vários corações
+    for (let i = 0; i < 30; i++) {
+
+        const coracao = document.createElement("div");
+
+        coracao.classList.add("coracao");
+        coracao.innerHTML = "❤️";
+
+        // Posição horizontal aleatória
+        coracao.style.left = Math.random() * 100 + "vw";
+
+        // Tamanho aleatório
+        coracao.style.fontSize = (20 + Math.random() * 35) + "px";
+
+        // Velocidade aleatória
+        coracao.style.animationDuration = (2 + Math.random() * 2) + "s";
+
+        document.body.appendChild(coracao);
+
+        // Remove depois da animação
+        setTimeout(() => {
+            coracao.remove();
+        }, 4000);
+     }
         });
     </script>
 
